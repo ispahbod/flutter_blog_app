@@ -23,6 +23,12 @@ class MyApp extends StatelessWidget {
               color: Constants.secondryTextColor,
               fontSize: 18,
             ),
+            headline5: TextStyle(
+              fontFamily: Constants.themeFontFamily,
+              fontWeight: FontWeight.w600,
+              color: Colors.white,
+              fontSize: 18,
+            ),
             headline6: TextStyle(
               fontFamily: Constants.themeFontFamily,
               fontWeight: FontWeight.w600,

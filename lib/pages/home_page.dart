@@ -1,6 +1,7 @@
 import 'package:dotted_border/dotted_border.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_blog_app/carousel/carousel_slider.dart';
 import 'package:flutter_blog_app/data.dart';
 
 class HomeScreen extends StatelessWidget {
@@ -38,11 +39,112 @@ class HomeScreen extends StatelessWidget {
                 padding: const EdgeInsets.fromLTRB(0, 14, 0, 14),
                 child: _StoryList(stories: stories, theme: _theme),
               ),
+              Padding(
+                padding: const EdgeInsets.fromLTRB(5, 0,0, 0),
+                child: _CategoryList(),
+              )
             ],
           ),
         ),
       ),
     );
+  }
+}
+
+class _CategoryList extends StatelessWidget {
+  const _CategoryList({
+    super.key,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    final categories = AppDatabase.categories;
+    return CarouselSlider.builder(
+      itemCount: categories.length,
+      itemBuilder: (context, index, realIndex) {
+        return _CategoryItem(
+          category: categories[index],
+          left: 0,
+          right: realIndex == categories.length-1 ? 32 : 0,
+        );
+      },
+      options: CarouselOptions(
+          scrollDirection: Axis.horizontal,
+          viewportFraction: 0.8,
+          aspectRatio: 1.2,
+          padEnds: false,
+          initialPage: 0,
+          disableCenter: true,
+          enableInfiniteScroll: false,
+          enlargeCenterPage: true,
+          enlargeStrategy: CenterPageEnlargeStrategy.height),
+    );
+  }
+}
+
+class _CategoryItem extends StatelessWidget {
+  final Category category;
+  final double left;
+  final double right;
+
+  const _CategoryItem({
+    Key? key,
+    required this.category,
+    required this.left,
+    required this.right,
+  }) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Stack(children: [
+      Positioned.fill(
+        top: 100,
+        right: 56,
+        left: 56,
+        bottom: 20,
+        child: Container(
+          decoration: BoxDecoration(
+              boxShadow: [BoxShadow(blurRadius: 15, color: Color(0xaa0D253C))]),
+        ),
+      ),
+      Positioned.fill(
+        left: left,
+        right: right,
+        child: Container(
+          margin: EdgeInsets.fromLTRB(15, 5, 0, 15),
+          child: ClipRRect(
+            child: Image.asset(
+              'assets/images/posts/large/${category.imageFileName}',
+              fit: BoxFit.cover,
+            ),
+            borderRadius: BorderRadius.circular(28),
+          ),
+          foregroundDecoration: BoxDecoration(
+            borderRadius: BorderRadius.circular(28),
+            gradient: LinearGradient(
+              begin: Alignment.bottomCenter,
+              end: Alignment.center,
+              colors: [
+                Color(0xff0D253C),
+                Colors.transparent,
+              ],
+            ),
+          ),
+          decoration: BoxDecoration(
+            color: Colors.blueAccent,
+            borderRadius: BorderRadius.circular(32),
+          ),
+        ),
+      ),
+      Positioned(
+        bottom: 46,
+        left: 42,
+        child: Text(
+          category.title,
+          style: Theme.of(context).textTheme.headline5!.apply(),
+        ),
+      )
+    ]);
   }
 }
 
