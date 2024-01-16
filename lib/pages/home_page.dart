@@ -2,6 +2,7 @@ import 'package:dotted_border/dotted_border.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_blog_app/carousel/carousel_slider.dart';
+import 'package:flutter_blog_app/constants.dart';
 import 'package:flutter_blog_app/data.dart';
 
 class HomeScreen extends StatelessWidget {
@@ -9,11 +10,13 @@ class HomeScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final ThemeData _theme = Theme.of(context)!;
+    final ThemeData _theme = Theme.of(context);
     final stories = AppDatabase.stories;
+    final posts = AppDatabase.posts;
     return Scaffold(
       body: SafeArea(
         child: SingleChildScrollView(
+          physics: BouncingScrollPhysics(),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
@@ -40,9 +43,26 @@ class HomeScreen extends StatelessWidget {
                 child: _StoryList(stories: stories, theme: _theme),
               ),
               Padding(
-                padding: const EdgeInsets.fromLTRB(5, 0,0, 0),
+                padding: const EdgeInsets.fromLTRB(5, 0, 0, 0),
                 child: _CategoryList(),
-              )
+              ),
+              Padding(
+                padding: EdgeInsets.fromLTRB(25, 20, 10, 20),
+                child: _PostList(),
+              ),
+              Padding(
+                padding: const EdgeInsets.fromLTRB(13, 0, 13, 0),
+                child: ListView.builder(
+                  physics: ClampingScrollPhysics(),
+                  itemCount: posts.length,
+                  itemExtent: 141,
+                  shrinkWrap: true,
+                  itemBuilder: (context, index) {
+                    final post = posts[index];
+                    return _Post(post: post);
+                  },
+                ),
+              ),
             ],
           ),
         ),
@@ -65,7 +85,7 @@ class _CategoryList extends StatelessWidget {
         return _CategoryItem(
           category: categories[index],
           left: 0,
-          right: realIndex == categories.length-1 ? 32 : 0,
+          right: realIndex == categories.length - 1 ? 32 : 0,
         );
       },
       options: CarouselOptions(
@@ -215,61 +235,195 @@ class _Story extends StatelessWidget {
       ),
     );
   }
-}
 
-Widget _profileImageNormal(story, theme) {
-  return Container(
-    height: 68,
-    width: 68,
-    decoration: BoxDecoration(
-      borderRadius: BorderRadius.circular(24),
-      gradient: const LinearGradient(
-        begin: Alignment.topLeft,
-        colors: [
-          Color(0xff376AED),
-          Color(0xff49B0E2),
-          Color(0xff9CECFB),
-        ],
-      ),
-    ),
-    child: Container(
-      margin: const EdgeInsets.all(2.5),
+  Widget _profileImageNormal(story, theme) {
+    return Container(
+      height: 68,
+      width: 68,
       decoration: BoxDecoration(
-        color: Colors.white,
-        borderRadius: BorderRadius.circular(22),
-      ),
-      padding: EdgeInsets.all(5),
-      child: _profileImage(story.imageFileName),
-    ),
-  );
-}
-
-Widget _profileImageViewed(story, theme) {
-  return SizedBox(
-    height: 68,
-    width: 68,
-    child: DottedBorder(
-      borderType: BorderType.RRect,
-      color: Color(0xff7B8BB2),
-      dashPattern: [5, 4],
-      strokeWidth: 2,
-      radius: const Radius.circular(24),
-      padding: const EdgeInsets.all(6),
-      child: Container(
-        height: 68,
-        width: 68,
-        decoration: BoxDecoration(
-          borderRadius: BorderRadius.circular(24),
+        borderRadius: BorderRadius.circular(24),
+        gradient: const LinearGradient(
+          begin: Alignment.topLeft,
+          colors: [
+            Color(0xff376AED),
+            Color(0xff49B0E2),
+            Color(0xff9CECFB),
+          ],
         ),
+      ),
+      child: Container(
+        margin: const EdgeInsets.all(2.5),
+        decoration: BoxDecoration(
+          color: Colors.white,
+          borderRadius: BorderRadius.circular(22),
+        ),
+        padding: EdgeInsets.all(5),
         child: _profileImage(story.imageFileName),
       ),
-    ),
-  );
+    );
+  }
+
+  Widget _profileImageViewed(story, theme) {
+    return SizedBox(
+      height: 68,
+      width: 68,
+      child: DottedBorder(
+        borderType: BorderType.RRect,
+        color: Color(0xff7B8BB2),
+        dashPattern: [5, 4],
+        strokeWidth: 2,
+        radius: const Radius.circular(24),
+        padding: const EdgeInsets.all(6),
+        child: Container(
+          height: 68,
+          width: 68,
+          decoration: BoxDecoration(
+            borderRadius: BorderRadius.circular(24),
+          ),
+          child: _profileImage(story.imageFileName),
+        ),
+      ),
+    );
+  }
+
+  Widget _profileImage(imageFileName) {
+    return ClipRRect(
+      borderRadius: BorderRadius.circular(16),
+      child: Image.asset("assets/images/stories/${imageFileName}"),
+    );
+  }
 }
 
-Widget _profileImage(imageFileName) {
-  return ClipRRect(
-    borderRadius: BorderRadius.circular(16),
-    child: Image.asset("assets/images/stories/${imageFileName}"),
-  );
+class _PostList extends StatelessWidget {
+  @override
+  const _PostList({
+    Key? key,
+  }) : super(key: key);
+
+  Widget build(BuildContext context) {
+    return Column(
+      children: [
+        Row(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          crossAxisAlignment: CrossAxisAlignment.center,
+          children: [
+            Text("Latest Posts", style: Theme.of(context).textTheme.headline4),
+            TextButton(
+              onPressed: () {},
+              child: const Text(
+                "more",
+                style: TextStyle(color: Constants.primaryColor),
+              ),
+            ),
+          ],
+        ),
+      ],
+    );
+  }
+}
+
+class _Post extends StatelessWidget {
+  const _Post({
+    super.key,
+    required this.post,
+  });
+
+  final PostData post;
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      height: 149,
+      width: 149,
+      margin: EdgeInsets.fromLTRB(10, 8, 10, 8),
+      decoration: BoxDecoration(
+        color: Colors.white,
+        borderRadius: BorderRadius.circular(24),
+        boxShadow: const [
+          BoxShadow(blurRadius: 10, color: Color(0x1a5282FF)),
+        ],
+      ),
+      child: Row(
+        children: [
+          ClipRRect(
+            borderRadius: BorderRadius.circular(16),
+            child:
+                Image.asset('assets/images/posts/small/${post.imageFileName}'),
+          ),
+          Expanded(
+            child: Padding(
+              padding: const EdgeInsets.only(left: 15, right: 15),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Text(
+                    post.caption,
+                    style: Theme.of(context)
+                        .textTheme
+                        .headline3!
+                        .apply(color: Color(0xff376AED)),
+                  ),
+                  const SizedBox(height: 6),
+                  Text(
+                    post.title,
+                    style: Theme.of(context).textTheme.headline3,
+                  ),
+                  const SizedBox(height: 15),
+                  Row(children: [
+                    Padding(
+                      padding: const EdgeInsets.only(right: 10),
+                      child: Row(
+                        children: [
+                          Icon(
+                            CupertinoIcons.hand_thumbsup,
+                            size: 16,
+                            color: Theme.of(context).textTheme.bodyText2!.color,
+                          ),
+                          SizedBox(width: 4),
+                          Text(
+                            post.likes,
+                            style: Theme.of(context).textTheme.subtitle2,
+                          ),
+                        ],
+                      ),
+                    ),
+                    Padding(
+                      padding: const EdgeInsets.only(right: 10),
+                      child: Row(
+                        children: [
+                          Icon(
+                            CupertinoIcons.clock,
+                            size: 16,
+                            color: Theme.of(context).textTheme.bodyText2!.color,
+                          ),
+                          SizedBox(width: 4),
+                          Text(
+                            post.time,
+                            style: Theme.of(context).textTheme.subtitle2,
+                          ),
+                        ],
+                      ),
+                    ),
+                    Expanded(
+                      child: Container(
+                        alignment: Alignment.centerRight,
+                        child: Icon(
+                          post.isBookmarked
+                              ? CupertinoIcons.bookmark_fill
+                              : CupertinoIcons.bookmark,
+                          size: 16,
+                          color: Theme.of(context).textTheme.bodyText2!.color,
+                        ),
+                      ),
+                    ),
+                  ])
+                ],
+              ),
+            ),
+          )
+        ],
+      ),
+    );
+  }
 }
