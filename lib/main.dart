@@ -34,8 +34,16 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       title: 'Flutter Demo',
+
       theme: ThemeData(
-        colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
+        colorScheme: ColorScheme.light(
+          primary: Constants.primaryColor,
+          onPrimary: Colors.white,
+          background: Color(0xffFBFCFF),
+          surface: Colors.white,
+          onSurface: Constants.primaryTextColor,
+          onBackground: Constants.primaryTextColor,
+        ),
         useMaterial3: true,
         textButtonTheme: TextButtonThemeData(
           style: ButtonStyle(

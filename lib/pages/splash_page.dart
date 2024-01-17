@@ -2,6 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_blog_app/gen/assets.gen.dart';
 import 'package:flutter_blog_app/pages/home_page.dart';
+import 'package:flutter_blog_app/pages/onboarding_page.dart';
 
 class SplashScreen extends StatefulWidget {
   const SplashScreen({Key? key}) : super(key: key);
@@ -16,7 +17,8 @@ class _SplashScreenState extends State<SplashScreen> {
     Future.delayed(Duration(seconds: 2)).then((value) => {
       // Navigator.of(context).push(MaterialPageRoute(builder: (context)=>HomeScreen()))
       // Navigator.of(context).push(CupertinoPageRoute(builder: (context)=>HomeScreen()))
-      Navigator.of(context).pushReplacement(CupertinoPageRoute(builder: (context)=>HomeScreen()))
+      // Navigator.of(context).pushReplacement(CupertinoPageRoute(builder: (context)=>HomeScreen()))
+      Navigator.of(context).pushReplacement(CupertinoPageRoute(builder: (context)=>OnBoardingScreen()))
     });
     super.initState();
   }
