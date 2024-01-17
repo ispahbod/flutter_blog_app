@@ -27,7 +27,8 @@ class HomeScreen extends StatelessWidget {
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
-                      Text("Hi , Hamed Hadi!", style: _theme.textTheme.subtitle1),
+                      Text("Hi , Hamed Hadi!",
+                          style: _theme.textTheme.titleMedium),
                       Image.asset(
                         "assets/images/icons/notification.png",
                         width: 34,
@@ -39,18 +40,18 @@ class HomeScreen extends StatelessWidget {
                 Padding(
                     padding: const EdgeInsets.fromLTRB(23, 0, 24, 0),
                     child: Text("Explore today's",
-                        style: _theme.textTheme.headline6)),
+                        style: _theme.textTheme.displayLarge)),
                 Padding(
                   padding: const EdgeInsets.fromLTRB(0, 14, 0, 14),
                   child: _StoryList(stories: stories, theme: _theme),
                 ),
-                Padding(
-                  padding: const EdgeInsets.fromLTRB(5, 0, 0, 0),
-                  child: const _CategoryList(),
+                const Padding(
+                  padding: EdgeInsets.fromLTRB(5, 0, 0, 0),
+                  child:  _CategoryList(),
                 ),
                 const Padding(
-                  padding: const EdgeInsets.fromLTRB(25, 20, 10, 20),
-                  child: const _PostList(),
+                  padding: EdgeInsets.fromLTRB(25, 20, 10, 20),
+                  child: _PostList(),
                 ),
                 Padding(
                   padding: const EdgeInsets.fromLTRB(13, 0, 13, 0),
@@ -76,8 +77,8 @@ class HomeScreen extends StatelessWidget {
 
 class _CategoryList extends StatelessWidget {
   const _CategoryList({
-    super.key,
-  });
+    Key? key,
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -126,7 +127,7 @@ class _CategoryItem extends StatelessWidget {
         left: 56,
         bottom: 20,
         child: Container(
-          decoration: BoxDecoration(
+          decoration: const BoxDecoration(
               boxShadow: [BoxShadow(blurRadius: 15, color: Color(0xaa0D253C))]),
         ),
       ),
@@ -134,17 +135,10 @@ class _CategoryItem extends StatelessWidget {
         left: left,
         right: right,
         child: Container(
-          margin: EdgeInsets.fromLTRB(15, 5, 0, 15),
-          child: ClipRRect(
-            child: Image.asset(
-              'assets/images/posts/large/${category.imageFileName}',
-              fit: BoxFit.cover,
-            ),
-            borderRadius: BorderRadius.circular(28),
-          ),
+          margin: const EdgeInsets.fromLTRB(15, 5, 0, 15),
           foregroundDecoration: BoxDecoration(
             borderRadius: BorderRadius.circular(28),
-            gradient: LinearGradient(
+            gradient: const LinearGradient(
               begin: Alignment.bottomCenter,
               end: Alignment.center,
               colors: [
@@ -157,6 +151,13 @@ class _CategoryItem extends StatelessWidget {
             color: Colors.blueAccent,
             borderRadius: BorderRadius.circular(32),
           ),
+          child: ClipRRect(
+            borderRadius: BorderRadius.circular(28),
+            child: Image.asset(
+              'assets/images/posts/large/${category.imageFileName}',
+              fit: BoxFit.cover,
+            ),
+          ),
         ),
       ),
       Positioned(
@@ -164,7 +165,7 @@ class _CategoryItem extends StatelessWidget {
         left: 42,
         child: Text(
           category.title,
-          style: Theme.of(context).textTheme.headline5!.apply(),
+          style: Theme.of(context).textTheme.bodyLarge,
         ),
       )
     ]);
@@ -227,13 +228,14 @@ class _Story extends StatelessWidget {
                   bottom: 0,
                   right: 0,
                   child: Image.asset(
-                      "assets/images/icons/${story.iconFileName}",
-                      width: 24,
-                      height: 24))
+                    "assets/images/icons/${story.iconFileName}",
+                    width: 24,
+                    height: 24,
+                  ))
             ],
           ),
-          SizedBox(height: 8),
-          Text(story.name, style: _theme.textTheme.bodyText2),
+          const SizedBox(height: 8),
+          Text(story.name, style: _theme.textTheme.bodyMedium),
         ],
       ),
     );
@@ -260,7 +262,7 @@ class _Story extends StatelessWidget {
           color: Colors.white,
           borderRadius: BorderRadius.circular(22),
         ),
-        padding: EdgeInsets.all(5),
+        padding: const EdgeInsets.all(5),
         child: _profileImage(story.imageFileName),
       ),
     );
@@ -272,8 +274,8 @@ class _Story extends StatelessWidget {
       width: 68,
       child: DottedBorder(
         borderType: BorderType.RRect,
-        color: Color(0xff7B8BB2),
-        dashPattern: [5, 4],
+        color: const Color(0xff7B8BB2),
+        dashPattern: const [5, 4],
         strokeWidth: 2,
         radius: const Radius.circular(24),
         padding: const EdgeInsets.all(6),
@@ -298,11 +300,11 @@ class _Story extends StatelessWidget {
 }
 
 class _PostList extends StatelessWidget {
-  @override
   const _PostList({
     Key? key,
   }) : super(key: key);
 
+  @override
   Widget build(BuildContext context) {
     return Column(
       children: [
@@ -310,7 +312,8 @@ class _PostList extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
-            Text("Latest Posts", style: Theme.of(context).textTheme.headline4),
+            Text("Latest Posts",
+                style: Theme.of(context).textTheme.displayMedium),
             TextButton(
               onPressed: () {},
               child: const Text(
@@ -327,9 +330,9 @@ class _PostList extends StatelessWidget {
 
 class _Post extends StatelessWidget {
   const _Post({
-    super.key,
+    Key? key,
     required this.post,
-  });
+  }) : super(key: key);
 
   final PostData post;
 
@@ -338,7 +341,7 @@ class _Post extends StatelessWidget {
     return Container(
       height: 149,
       width: 149,
-      margin: EdgeInsets.fromLTRB(10, 8, 10, 8),
+      margin: const EdgeInsets.fromLTRB(10, 8, 10, 8),
       decoration: BoxDecoration(
         color: Colors.white,
         borderRadius: BorderRadius.circular(24),
@@ -364,13 +367,13 @@ class _Post extends StatelessWidget {
                     post.caption,
                     style: Theme.of(context)
                         .textTheme
-                        .headline3!
-                        .apply(color: Color(0xff376AED)),
+                        .displaySmall!
+                        .apply(color: const Color(0xff376AED)),
                   ),
                   const SizedBox(height: 6),
                   Text(
                     post.title,
-                    style: Theme.of(context).textTheme.headline3,
+                    style: Theme.of(context).textTheme.displaySmall,
                   ),
                   const SizedBox(height: 15),
                   Row(children: [
@@ -381,12 +384,13 @@ class _Post extends StatelessWidget {
                           Icon(
                             CupertinoIcons.hand_thumbsup,
                             size: 16,
-                            color: Theme.of(context).textTheme.bodyText2!.color,
+                            color:
+                                Theme.of(context).textTheme.bodyMedium!.color,
                           ),
-                          SizedBox(width: 4),
+                          const SizedBox(width: 4),
                           Text(
                             post.likes,
-                            style: Theme.of(context).textTheme.subtitle2,
+                            style: Theme.of(context).textTheme.titleSmall,
                           ),
                         ],
                       ),
@@ -398,12 +402,13 @@ class _Post extends StatelessWidget {
                           Icon(
                             CupertinoIcons.clock,
                             size: 16,
-                            color: Theme.of(context).textTheme.bodyText2!.color,
+                            color:
+                                Theme.of(context).textTheme.bodyMedium!.color,
                           ),
-                          SizedBox(width: 4),
+                          const SizedBox(width: 4),
                           Text(
                             post.time,
-                            style: Theme.of(context).textTheme.subtitle2,
+                            style: Theme.of(context).textTheme.titleSmall,
                           ),
                         ],
                       ),
@@ -416,7 +421,7 @@ class _Post extends StatelessWidget {
                               ? CupertinoIcons.bookmark_fill
                               : CupertinoIcons.bookmark,
                           size: 16,
-                          color: Theme.of(context).textTheme.bodyText2!.color,
+                          color: Theme.of(context).textTheme.bodyMedium!.color,
                         ),
                       ),
                     ),
@@ -430,4 +435,3 @@ class _Post extends StatelessWidget {
     );
   }
 }
-

@@ -36,49 +36,55 @@ class MyApp extends StatelessWidget {
             ),
           ),
         ),
-        textTheme:TextTheme(
-          subtitle1: TextStyle(
+        textTheme: const TextTheme(
+          titleMedium: TextStyle(
             fontFamily: Constants.themeFontFamily,
             fontWeight: FontWeight.w500,
             color: Constants.secondryTextColor,
             fontSize: 18,
           ),
-          subtitle2: TextStyle(
+          titleSmall: TextStyle(
             fontFamily: Constants.themeFontFamily,
             fontWeight: FontWeight.w500,
             color: Constants.secondryTextColor,
             fontSize: 12,
           ),
-          headline3: TextStyle(
-            fontFamily: Constants.themeFontFamily,
-            fontWeight: FontWeight.w500,
-            color: Colors.black,
-            fontSize: 13,
-          ),
-          headline4: TextStyle(
-            fontFamily: Constants.themeFontFamily,
-            fontWeight: FontWeight.w900,
-            color: Colors.black,
-            fontSize: 22,
-          ),
-          headline5: TextStyle(
-            fontFamily: Constants.themeFontFamily,
-            fontWeight: FontWeight.w600,
-            color: Colors.white,
-            fontSize: 18,
-          ),
-          headline6: TextStyle(
+          displayLarge: TextStyle(
             fontFamily: Constants.themeFontFamily,
             fontWeight: FontWeight.w600,
             color: Constants.primaryTextColor,
             fontSize: 26,
           ),
-          bodyText2: TextStyle(
+          displayMedium: TextStyle(
+            fontFamily: Constants.themeFontFamily,
+            fontWeight: FontWeight.w900,
+            color: Colors.black,
+            fontSize: 22,
+          ),
+          displaySmall: TextStyle(
+            fontFamily: Constants.themeFontFamily,
+            fontWeight: FontWeight.w500,
+            color: Colors.black,
+            fontSize: 13,
+          ),
+          bodyMedium: TextStyle(
             fontFamily: Constants.themeFontFamily,
             fontWeight: FontWeight.w500,
             color: Constants.secondryTextColor,
             fontSize: 14,
           ),
+          bodyLarge: TextStyle(
+            fontFamily: Constants.themeFontFamily,
+            fontWeight: FontWeight.w600,
+            color: Colors.white,
+            fontSize: 18,
+          ),
+          bodySmall: TextStyle(
+            fontFamily: Constants.themeFontFamily,
+            fontWeight: FontWeight.w600,
+            color: Constants.secondryTextColor,
+            fontSize: 11,
+          )
         ),
       ),
       home: Stack(
@@ -189,8 +195,9 @@ class _BottomNavigationItem extends StatelessWidget {
     return Column(
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
-        Image.asset('assets/images/icons/${iconFileName}'),
-        Text(title, style: Theme.of(context).textTheme.subtitle2),
+        Image.asset("assets/images/icons/${iconFileName}"),
+        const SizedBox(height: 4),
+        Text(title, style: Theme.of(context).textTheme.bodySmall),
       ],
     );
   }
