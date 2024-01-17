@@ -13,57 +13,60 @@ class HomeScreen extends StatelessWidget {
     final ThemeData _theme = Theme.of(context);
     final stories = AppDatabase.stories;
     final posts = AppDatabase.posts;
-    return Scaffold(
-      body: SafeArea(
-        child: SingleChildScrollView(
-          physics: BouncingScrollPhysics(),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Padding(
-                padding: const EdgeInsets.fromLTRB(24, 24, 24, 4),
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    Text("Hi , Hamed Hadi!", style: _theme.textTheme.subtitle1),
-                    Image.asset(
-                      "assets/images/icons/notification.png",
-                      width: 34,
-                      height: 34,
-                    ),
-                  ],
+    return Padding(
+      padding: const EdgeInsets.only(bottom: 65),
+      child: Scaffold(
+        body: SafeArea(
+          child: SingleChildScrollView(
+            physics: const BouncingScrollPhysics(),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Padding(
+                  padding: const EdgeInsets.fromLTRB(24, 24, 24, 4),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Text("Hi , Hamed Hadi!", style: _theme.textTheme.subtitle1),
+                      Image.asset(
+                        "assets/images/icons/notification.png",
+                        width: 34,
+                        height: 34,
+                      ),
+                    ],
+                  ),
                 ),
-              ),
-              Padding(
-                  padding: const EdgeInsets.fromLTRB(23, 0, 24, 0),
-                  child: Text("Explore today's",
-                      style: _theme.textTheme.headline6)),
-              Padding(
-                padding: const EdgeInsets.fromLTRB(0, 14, 0, 14),
-                child: _StoryList(stories: stories, theme: _theme),
-              ),
-              Padding(
-                padding: const EdgeInsets.fromLTRB(5, 0, 0, 0),
-                child: _CategoryList(),
-              ),
-              Padding(
-                padding: EdgeInsets.fromLTRB(25, 20, 10, 20),
-                child: _PostList(),
-              ),
-              Padding(
-                padding: const EdgeInsets.fromLTRB(13, 0, 13, 0),
-                child: ListView.builder(
-                  physics: ClampingScrollPhysics(),
-                  itemCount: posts.length,
-                  itemExtent: 141,
-                  shrinkWrap: true,
-                  itemBuilder: (context, index) {
-                    final post = posts[index];
-                    return _Post(post: post);
-                  },
+                Padding(
+                    padding: const EdgeInsets.fromLTRB(23, 0, 24, 0),
+                    child: Text("Explore today's",
+                        style: _theme.textTheme.headline6)),
+                Padding(
+                  padding: const EdgeInsets.fromLTRB(0, 14, 0, 14),
+                  child: _StoryList(stories: stories, theme: _theme),
                 ),
-              ),
-            ],
+                Padding(
+                  padding: const EdgeInsets.fromLTRB(5, 0, 0, 0),
+                  child: const _CategoryList(),
+                ),
+                const Padding(
+                  padding: const EdgeInsets.fromLTRB(25, 20, 10, 20),
+                  child: const _PostList(),
+                ),
+                Padding(
+                  padding: const EdgeInsets.fromLTRB(13, 0, 13, 0),
+                  child: ListView.builder(
+                    physics: const ClampingScrollPhysics(),
+                    itemCount: posts.length,
+                    itemExtent: 141,
+                    shrinkWrap: true,
+                    itemBuilder: (context, index) {
+                      final post = posts[index];
+                      return _Post(post: post);
+                    },
+                  ),
+                ),
+              ],
+            ),
           ),
         ),
       ),
@@ -427,3 +430,4 @@ class _Post extends StatelessWidget {
     );
   }
 }
+
