@@ -1,5 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter_blog_app/gen/assets.gen.dart';
+import 'package:flutter_blog_app/gen/fonts.gen.dart';
+import 'package:flutter_blog_app/gen/fonts.gen.dart';
+import 'package:flutter_blog_app/gen/fonts.gen.dart';
+import 'package:flutter_blog_app/gen/fonts.gen.dart';
+import 'package:flutter_blog_app/gen/fonts.gen.dart';
+import 'package:flutter_blog_app/gen/fonts.gen.dart';
+import 'package:flutter_blog_app/gen/fonts.gen.dart';
+import 'package:flutter_blog_app/gen/fonts.gen.dart';
+import 'package:flutter_blog_app/gen/fonts.gen.dart';
 import 'constants.dart';
 import 'pages/home_page.dart';
 
@@ -31,56 +41,56 @@ class MyApp extends StatelessWidget {
                 fontSize: 16,
                 color: Constants.primaryColor,
                 fontWeight: FontWeight.w400,
-                fontFamily: Constants.themeFontFamily,
+                fontFamily: FontFamily.avenir,
               ),
             ),
           ),
         ),
         textTheme: const TextTheme(
           titleMedium: TextStyle(
-            fontFamily: Constants.themeFontFamily,
+            fontFamily: FontFamily.avenir,
             fontWeight: FontWeight.w500,
             color: Constants.secondryTextColor,
             fontSize: 18,
           ),
           titleSmall: TextStyle(
-            fontFamily: Constants.themeFontFamily,
+            fontFamily: FontFamily.avenir,
             fontWeight: FontWeight.w500,
             color: Constants.secondryTextColor,
             fontSize: 12,
           ),
           displayLarge: TextStyle(
-            fontFamily: Constants.themeFontFamily,
+            fontFamily: FontFamily.avenir,
             fontWeight: FontWeight.w600,
             color: Constants.primaryTextColor,
             fontSize: 26,
           ),
           displayMedium: TextStyle(
-            fontFamily: Constants.themeFontFamily,
+            fontFamily: FontFamily.avenir,
             fontWeight: FontWeight.w900,
             color: Colors.black,
             fontSize: 22,
           ),
           displaySmall: TextStyle(
-            fontFamily: Constants.themeFontFamily,
+            fontFamily: FontFamily.avenir,
             fontWeight: FontWeight.w500,
             color: Colors.black,
             fontSize: 13,
           ),
           bodyMedium: TextStyle(
-            fontFamily: Constants.themeFontFamily,
+            fontFamily: FontFamily.avenir,
             fontWeight: FontWeight.w500,
             color: Constants.secondryTextColor,
             fontSize: 14,
           ),
           bodyLarge: TextStyle(
-            fontFamily: Constants.themeFontFamily,
+            fontFamily: FontFamily.avenir,
             fontWeight: FontWeight.w600,
             color: Colors.white,
             fontSize: 18,
           ),
           bodySmall: TextStyle(
-            fontFamily: Constants.themeFontFamily,
+            fontFamily: FontFamily.avenir,
             fontWeight: FontWeight.w600,
             color: Constants.secondryTextColor,
             fontSize: 11,
@@ -134,7 +144,7 @@ class _BottomNavigation extends StatelessWidget {
                   borderRadius: BorderRadius.circular(32.5),
                   color: const Color(0xff376AED),
                 ),
-                child: Image.asset('assets/images/icons/plus.png'),
+                child: Assets.images.icons.plus.image(width: 32,height: 32),
               ),
             ),
           ),

@@ -7,7 +7,6 @@ import 'package:flutter_blog_app/data.dart';
 
 class HomeScreen extends StatelessWidget {
   const HomeScreen({Key? key}) : super(key: key);
-
   @override
   Widget build(BuildContext context) {
     final ThemeData _theme = Theme.of(context);
