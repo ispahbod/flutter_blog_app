@@ -62,6 +62,7 @@ flutter:
     - assets/images/posts/large/
     - assets/images/posts/small/
     - assets/images/stories/
+    - assets/images/background/
 
   fonts:
     - family: Avenir
@@ -75,9 +76,9 @@ flutter:
         - asset: assets/fonts/AvenirLTProHeavy.otf
           weight: 700
 
-# pubspec.yaml
-# ...
-
 flutter_gen:
+  output: lib/gen/ # Optional (default: lib/gen/)
+  line_length: 80 # Optional (default: 80)
+
   integrations:
     flutter_svg: true

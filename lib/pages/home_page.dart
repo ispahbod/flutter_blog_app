@@ -4,70 +4,79 @@ import 'package:flutter/material.dart';
 import 'package:flutter_blog_app/carousel/carousel_slider.dart';
 import 'package:flutter_blog_app/constants.dart';
 import 'package:flutter_blog_app/data.dart';
+import 'package:flutter_blog_app/navigation.dart';
 
 class HomeScreen extends StatelessWidget {
   const HomeScreen({Key? key}) : super(key: key);
+
   @override
   Widget build(BuildContext context) {
     final ThemeData _theme = Theme.of(context);
     final stories = AppDatabase.stories;
     final posts = AppDatabase.posts;
-    return Padding(
-      padding: const EdgeInsets.only(bottom: 65),
-      child: Scaffold(
-        body: SafeArea(
-          child: SingleChildScrollView(
-            physics: const BouncingScrollPhysics(),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Padding(
-                  padding: const EdgeInsets.fromLTRB(24, 24, 24, 4),
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+    return Scaffold(
+      body: SafeArea(
+        child: Stack(
+          children: [
+            Positioned.fill(
+              child: SingleChildScrollView(
+                physics: const BouncingScrollPhysics(),
+                child: Padding(
+                  padding: const EdgeInsets.only(bottom: 85),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      Text("Hi , Hamed Hadi!",
-                          style: _theme.textTheme.titleMedium),
-                      Image.asset(
-                        "assets/images/icons/notification.png",
-                        width: 34,
-                        height: 34,
+                      Padding(
+                        padding: const EdgeInsets.fromLTRB(24, 24, 24, 4),
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            Text("Hi , Hamed Hadi!",
+                                style: _theme.textTheme.titleMedium),
+                            Image.asset(
+                              "assets/images/icons/notification.png",
+                              width: 34,
+                              height: 34,
+                            ),
+                          ],
+                        ),
+                      ),
+                      Padding(
+                          padding: const EdgeInsets.fromLTRB(23, 0, 24, 0),
+                          child: Text("Explore today's",
+                              style: _theme.textTheme.displayLarge)),
+                      Padding(
+                        padding: const EdgeInsets.fromLTRB(0, 14, 0, 14),
+                        child: _StoryList(stories: stories, theme: _theme),
+                      ),
+                      const Padding(
+                        padding: EdgeInsets.fromLTRB(5, 0, 0, 0),
+                        child: _CategoryList(),
+                      ),
+                      const Padding(
+                        padding: EdgeInsets.fromLTRB(25, 20, 10, 20),
+                        child: _PostList(),
+                      ),
+                      Padding(
+                        padding: const EdgeInsets.fromLTRB(13, 0, 13, 0),
+                        child: ListView.builder(
+                          physics: const ClampingScrollPhysics(),
+                          itemCount: posts.length,
+                          itemExtent: 141,
+                          shrinkWrap: true,
+                          itemBuilder: (context, index) {
+                            final post = posts[index];
+                            return _Post(post: post);
+                          },
+                        ),
                       ),
                     ],
                   ),
                 ),
-                Padding(
-                    padding: const EdgeInsets.fromLTRB(23, 0, 24, 0),
-                    child: Text("Explore today's",
-                        style: _theme.textTheme.displayLarge)),
-                Padding(
-                  padding: const EdgeInsets.fromLTRB(0, 14, 0, 14),
-                  child: _StoryList(stories: stories, theme: _theme),
-                ),
-                const Padding(
-                  padding: EdgeInsets.fromLTRB(5, 0, 0, 0),
-                  child:  _CategoryList(),
-                ),
-                const Padding(
-                  padding: EdgeInsets.fromLTRB(25, 20, 10, 20),
-                  child: _PostList(),
-                ),
-                Padding(
-                  padding: const EdgeInsets.fromLTRB(13, 0, 13, 0),
-                  child: ListView.builder(
-                    physics: const ClampingScrollPhysics(),
-                    itemCount: posts.length,
-                    itemExtent: 141,
-                    shrinkWrap: true,
-                    itemBuilder: (context, index) {
-                      final post = posts[index];
-                      return _Post(post: post);
-                    },
-                  ),
-                ),
-              ],
+              ),
             ),
-          ),
+            Positioned(bottom: 0, right: 0, left: 0, child: BottomNavigation()),
+          ],
         ),
       ),
     );
