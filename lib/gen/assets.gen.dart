@@ -43,6 +43,14 @@ class $AssetsImagesIconsGen {
   AssetGenImage get articles =>
       const AssetGenImage('assets/images/icons/Articles.png');
 
+  /// File path: assets/images/icons/Facebook.png
+  AssetGenImage get facebook =>
+      const AssetGenImage('assets/images/icons/Facebook.png');
+
+  /// File path: assets/images/icons/Google.png
+  AssetGenImage get google =>
+      const AssetGenImage('assets/images/icons/Google.png');
+
   /// File path: assets/images/icons/Home.png
   AssetGenImage get home => const AssetGenImage('assets/images/icons/Home.png');
 
@@ -55,6 +63,10 @@ class $AssetsImagesIconsGen {
   /// File path: assets/images/icons/Search.png
   AssetGenImage get search =>
       const AssetGenImage('assets/images/icons/Search.png');
+
+  /// File path: assets/images/icons/Twitter.png
+  AssetGenImage get twitter =>
+      const AssetGenImage('assets/images/icons/Twitter.png');
 
   /// File path: assets/images/icons/category_1.png
   AssetGenImage get category1 =>
@@ -82,10 +94,13 @@ class $AssetsImagesIconsGen {
   /// List of all assets
   List<dynamic> get values => [
         articles,
+        facebook,
+        google,
         home,
         logo,
         menu,
         search,
+        twitter,
         category1,
         category2,
         category3,

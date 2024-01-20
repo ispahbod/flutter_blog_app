@@ -1,19 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:flutter_blog_app/gen/assets.gen.dart';
 import 'package:flutter_blog_app/gen/fonts.gen.dart';
-import 'package:flutter_blog_app/gen/fonts.gen.dart';
-import 'package:flutter_blog_app/gen/fonts.gen.dart';
-import 'package:flutter_blog_app/gen/fonts.gen.dart';
-import 'package:flutter_blog_app/gen/fonts.gen.dart';
-import 'package:flutter_blog_app/gen/fonts.gen.dart';
-import 'package:flutter_blog_app/gen/fonts.gen.dart';
-import 'package:flutter_blog_app/gen/fonts.gen.dart';
-import 'package:flutter_blog_app/gen/fonts.gen.dart';
-import 'package:flutter_blog_app/navigation.dart';
 import 'constants.dart';
-import 'navigation.dart';
-import 'pages/home_page.dart';
 import 'pages/splash_page.dart';
 
 void main() {
@@ -29,14 +17,12 @@ void main() {
 
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
-
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Flutter Demo',
-
+      title: 'Blog Club',
       theme: ThemeData(
-        colorScheme: ColorScheme.light(
+        colorScheme: const ColorScheme.light(
           primary: Constants.primaryColor,
           onPrimary: Colors.white,
           background: Color(0xffFBFCFF),
@@ -108,12 +94,6 @@ class MyApp extends StatelessWidget {
             )),
       ),
       home: const SplashScreen(),
-      // home: Stack(
-      //   children: [
-      //     const Positioned.fill(child: HomeScreen()),
-      //     Positioned(bottom: 0, right: 0, left: 0, child: BottomNavigation()),
-      //   ],
-      // ),
     );
   }
 }

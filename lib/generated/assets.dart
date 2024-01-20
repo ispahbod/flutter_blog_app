@@ -23,12 +23,15 @@ class Assets {
   static const String iconsCategory2 = 'assets/images/icons/category_2.png';
   static const String iconsCategory3 = 'assets/images/icons/category_3.png';
   static const String iconsCategory4 = 'assets/images/icons/category_4.png';
+  static const String iconsFacebook = 'assets/images/icons/Facebook.png';
+  static const String iconsGoogle = 'assets/images/icons/Google.png';
   static const String iconsHome = 'assets/images/icons/Home.png';
   static const String iconsLOGO = 'assets/images/icons/LOGO.svg';
   static const String iconsMenu = 'assets/images/icons/Menu.png';
   static const String iconsNotification = 'assets/images/icons/notification.png';
   static const String iconsPlus = 'assets/images/icons/plus.png';
   static const String iconsSearch = 'assets/images/icons/Search.png';
+  static const String iconsTwitter = 'assets/images/icons/Twitter.png';
   static const String largeLargePost1 = 'assets/images/posts/large/large_post_1.jpg';
   static const String largeLargePost2 = 'assets/images/posts/large/large_post_2.jpg';
   static const String largeLargePost3 = 'assets/images/posts/large/large_post_3.jpg';

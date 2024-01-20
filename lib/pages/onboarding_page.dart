@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_blog_app/data.dart';
 import 'package:flutter_blog_app/gen/assets.gen.dart';
+import 'package:flutter_blog_app/pages/auth.dart';
 import 'package:flutter_blog_app/pages/home_page.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 
@@ -102,7 +103,7 @@ class _OnBoardingScreenState extends State<OnBoardingScreen> {
                             ElevatedButton(
                               onPressed: () {
                                 if (page == boards.length - 1) {
-                                  Navigator.of(context).pushReplacement(CupertinoPageRoute(builder: (builder) => HomeScreen()));
+                                  Navigator.of(context).pushReplacement(CupertinoPageRoute(builder: (builder) => AuthScreen()));
                                 } else {
                                   _pageController.animateToPage(page + 1, duration: Duration(milliseconds: 500), curve: Curves.decelerate);
                                 }
