@@ -28,12 +28,16 @@ class $AssetsImagesBackgroundGen {
   AssetGenImage get onboarding =>
       const AssetGenImage('assets/images/background/onboarding.png');
 
+  /// File path: assets/images/background/single_post.png
+  AssetGenImage get singlePost =>
+      const AssetGenImage('assets/images/background/single_post.png');
+
   /// File path: assets/images/background/splash.png
   AssetGenImage get splash =>
       const AssetGenImage('assets/images/background/splash.png');
 
   /// List of all assets
-  List<AssetGenImage> get values => [onboarding, splash];
+  List<AssetGenImage> get values => [onboarding, singlePost, splash];
 }
 
 class $AssetsImagesIconsGen {
@@ -51,6 +55,9 @@ class $AssetsImagesIconsGen {
   AssetGenImage get google =>
       const AssetGenImage('assets/images/icons/Google.png');
 
+  /// File path: assets/images/icons/Grid.svg
+  SvgGenImage get grid => const SvgGenImage('assets/images/icons/Grid.svg');
+
   /// File path: assets/images/icons/Home.png
   AssetGenImage get home => const AssetGenImage('assets/images/icons/Home.png');
 
@@ -63,6 +70,12 @@ class $AssetsImagesIconsGen {
   /// File path: assets/images/icons/Search.png
   AssetGenImage get search =>
       const AssetGenImage('assets/images/icons/Search.png');
+
+  /// File path: assets/images/icons/Table.svg
+  SvgGenImage get table => const SvgGenImage('assets/images/icons/Table.svg');
+
+  /// File path: assets/images/icons/Thumbs.svg
+  SvgGenImage get thumbs => const SvgGenImage('assets/images/icons/Thumbs.svg');
 
   /// File path: assets/images/icons/Twitter.png
   AssetGenImage get twitter =>
@@ -96,10 +109,13 @@ class $AssetsImagesIconsGen {
         articles,
         facebook,
         google,
+        grid,
         home,
         logo,
         menu,
         search,
+        table,
+        thumbs,
         twitter,
         category1,
         category2,

@@ -94,8 +94,8 @@ class _AuthScreenState extends State<AuthScreen> {
                         child: Padding(
                           padding: const EdgeInsets.all(32),
                           child: selectedTabIndex == loginTab
-                              ? _Login()
-                              : _Signup(),
+                              ? const _Login()
+                              : const _Signup(),
                         ),
                       ),
                     ),
@@ -112,8 +112,8 @@ class _AuthScreenState extends State<AuthScreen> {
 
 class _Login extends StatelessWidget {
   const _Login({
-    super.key,
-  });
+    Key? key,
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -150,14 +150,14 @@ class _Login extends StatelessWidget {
           ),
         ),
         const SizedBox(height: 12),
-        PasswordTextField(),
+        const PasswordTextField(),
         const SizedBox(height: 24),
         ElevatedButton(
           onPressed: () {
-            Navigator.of(context).pushReplacement(CupertinoPageRoute(builder: (builder) => HomeScreen()));
+            Navigator.of(context).pushReplacement(CupertinoPageRoute(builder: (builder) => const HomeScreen()));
           },
           style: ButtonStyle(
-            backgroundColor: MaterialStatePropertyAll(Constants.primaryColor),
+            backgroundColor: const MaterialStatePropertyAll(Constants.primaryColor),
             minimumSize: MaterialStatePropertyAll(
               Size(MediaQuery.of(context).size.width, 60),
             ),
@@ -208,9 +208,8 @@ class _Login extends StatelessWidget {
 
 class _Signup extends StatelessWidget {
   const _Signup({
-    super.key,
-  });
-
+    Key? key,
+  }) : super(key: key);
   @override
   Widget build(BuildContext context) {
     return Column(
@@ -236,7 +235,7 @@ class _Signup extends StatelessWidget {
         const TextField(
           style: TextStyle(color: Colors.black),
           decoration: InputDecoration(
-            label: Text("Fullname"),
+            label: Text('Full name'),
             enabledBorder: UnderlineInputBorder(
               borderSide: BorderSide(color: Colors.black12),
             ),
@@ -249,7 +248,7 @@ class _Signup extends StatelessWidget {
         const TextField(
           style: TextStyle(color: Colors.black),
           decoration: InputDecoration(
-            label: Text("Username"),
+            label: Text('Username'),
             enabledBorder: UnderlineInputBorder(
               borderSide: BorderSide(color: Colors.black12),
             ),
@@ -259,14 +258,14 @@ class _Signup extends StatelessWidget {
           ),
         ),
         const SizedBox(height: 12),
-        PasswordTextField(),
+        const PasswordTextField(),
         const SizedBox(height: 24),
         ElevatedButton(
           onPressed: () {
-            Navigator.of(context).pushReplacement(CupertinoPageRoute(builder: (builder) => HomeScreen()));
+            Navigator.of(context).pushReplacement(CupertinoPageRoute(builder: (builder) => const HomeScreen()));
           },
           style: ButtonStyle(
-            backgroundColor: MaterialStatePropertyAll(Constants.primaryColor),
+            backgroundColor: const  MaterialStatePropertyAll(Constants.primaryColor),
             minimumSize: MaterialStatePropertyAll(
               Size(MediaQuery.of(context).size.width, 60),
             ),
@@ -322,15 +321,15 @@ class _PasswordTextFieldState extends State<PasswordTextField> {
       obscureText: obscureText,
       enableSuggestions: false,
       autocorrect: false,
-      style: TextStyle(color: Colors.black),
+      style: const TextStyle(color: Colors.black),
       decoration: InputDecoration(
         labelText: "Password",
         hintText: "Enter your password",
         hintStyle: TextStyle(color: Colors.black.withOpacity(0.5)),
-        enabledBorder: UnderlineInputBorder(
+        enabledBorder: const UnderlineInputBorder(
           borderSide: BorderSide(color: Colors.black12),
         ),
-        focusedBorder: UnderlineInputBorder(
+        focusedBorder: const UnderlineInputBorder(
           borderSide: BorderSide(color: Constants.primaryColor),
         ),
         suffixIcon: TextButton(
@@ -339,7 +338,7 @@ class _PasswordTextFieldState extends State<PasswordTextField> {
               obscureText = !obscureText;
             });
           },
-          child: Text(
+          child: const Text(
             "Show",
           ),
         ),

@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_blog_app/gen/fonts.gen.dart';
+import 'package:flutter_blog_app/pages/article.dart';
+import 'package:flutter_blog_app/pages/profile.dart';
 import 'constants.dart';
 import 'pages/splash_page.dart';
 
@@ -17,6 +19,7 @@ void main() {
 
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
+
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -42,6 +45,11 @@ class MyApp extends StatelessWidget {
               ),
             ),
           ),
+        ),
+        appBarTheme: const AppBarTheme(
+          backgroundColor: Colors.white,
+          foregroundColor: Constants.primaryTextColor,
+          elevation: 0,
         ),
         textTheme: const TextTheme(
             titleMedium: TextStyle(
@@ -93,7 +101,8 @@ class MyApp extends StatelessWidget {
               fontSize: 11,
             )),
       ),
-      home: const SplashScreen(),
+      // home: const SplashScreen(),
+      home: const ProfileScreen(),
     );
   }
 }

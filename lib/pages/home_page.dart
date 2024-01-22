@@ -66,7 +66,7 @@ class HomeScreen extends StatelessWidget {
                           shrinkWrap: true,
                           itemBuilder: (context, index) {
                             final post = posts[index];
-                            return _Post(post: post);
+                            return Post(post: post);
                           },
                         ),
                       ),
@@ -336,8 +336,8 @@ class _PostList extends StatelessWidget {
   }
 }
 
-class _Post extends StatelessWidget {
-  const _Post({
+class Post extends StatelessWidget {
+  const Post({
     Key? key,
     required this.post,
   }) : super(key: key);
