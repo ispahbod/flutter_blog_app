@@ -1,8 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_blog_app/constants.dart';
-import 'package:flutter_blog_app/pages/home_page.dart';
-
+import 'package:flutter_blog_app/main.dart';
 import '../gen/assets.gen.dart';
 
 class AuthScreen extends StatefulWidget {
@@ -154,7 +153,7 @@ class _Login extends StatelessWidget {
         const SizedBox(height: 24),
         ElevatedButton(
           onPressed: () {
-            Navigator.of(context).pushReplacement(CupertinoPageRoute(builder: (builder) => const HomeScreen()));
+            Navigator.of(context).pushReplacement(CupertinoPageRoute(builder: (builder) =>  MainScreen()));
           },
           style: ButtonStyle(
             backgroundColor: const MaterialStatePropertyAll(Constants.primaryColor),
@@ -262,7 +261,7 @@ class _Signup extends StatelessWidget {
         const SizedBox(height: 24),
         ElevatedButton(
           onPressed: () {
-            Navigator.of(context).pushReplacement(CupertinoPageRoute(builder: (builder) => const HomeScreen()));
+            Navigator.of(context).pushReplacement(CupertinoPageRoute(builder: (builder) =>MainScreen()));
           },
           style: ButtonStyle(
             backgroundColor: const  MaterialStatePropertyAll(Constants.primaryColor),

@@ -2,12 +2,12 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_blog_app/gen/fonts.gen.dart';
 import 'package:flutter_blog_app/navigation.dart';
-import 'package:flutter_blog_app/pages/article.dart';
+import 'package:flutter_blog_app/pages/article_page.dart';
 import 'package:flutter_blog_app/pages/home_page.dart';
-import 'package:flutter_blog_app/pages/profile.dart';
-import 'package:flutter_blog_app/pages/search.dart';
+import 'package:flutter_blog_app/pages/onboarding_page.dart';
+import 'package:flutter_blog_app/pages/profile_page.dart';
+import 'package:flutter_blog_app/pages/search_page.dart';
 import 'constants.dart';
-import 'pages/splash_page.dart';
 
 void main() {
   SystemChrome.setSystemUIOverlayStyle(
@@ -22,7 +22,6 @@ void main() {
 
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
-
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -58,13 +57,13 @@ class MyApp extends StatelessWidget {
             titleMedium: TextStyle(
               fontFamily: FontFamily.avenir,
               fontWeight: FontWeight.w500,
-              color: Constants.secondryTextColor,
+              color: Constants.secondaryTextColor,
               fontSize: 18,
             ),
             titleSmall: TextStyle(
               fontFamily: FontFamily.avenir,
               fontWeight: FontWeight.w500,
-              color: Constants.secondryTextColor,
+              color: Constants.secondaryTextColor,
               fontSize: 12,
             ),
             displayLarge: TextStyle(
@@ -88,7 +87,7 @@ class MyApp extends StatelessWidget {
             bodyMedium: TextStyle(
               fontFamily: FontFamily.avenir,
               fontWeight: FontWeight.w500,
-              color: Constants.secondryTextColor,
+              color: Constants.secondaryTextColor,
               fontSize: 14,
             ),
             bodyLarge: TextStyle(
@@ -100,17 +99,18 @@ class MyApp extends StatelessWidget {
             bodySmall: TextStyle(
               fontFamily: FontFamily.avenir,
               fontWeight: FontWeight.w600,
-              color: Constants.secondryTextColor,
+              color: Constants.secondaryTextColor,
               fontSize: 11,
             )),
       ),
-      // home: const SplashScreen(),
-      home: MainScreen(),
+      home: const OnBoardingScreen(),
     );
   }
 }
 
 class MainScreen extends StatefulWidget {
+  const MainScreen({Key? key}) : super(key: key);
+
   @override
   State<MainScreen> createState() => _MainScreenState();
 }
@@ -124,10 +124,10 @@ const double bottomNavigationHeight = 65;
 class _MainScreenState extends State<MainScreen> {
   int selectedScreenIndex = homeIndex;
   final List<int> _history = [];
-  GlobalKey<NavigatorState> _homeKey = GlobalKey();
-  GlobalKey<NavigatorState> _articleKey = GlobalKey();
-  GlobalKey<NavigatorState> _searchKey = GlobalKey();
-  GlobalKey<NavigatorState> _menuKey = GlobalKey();
+  final GlobalKey<NavigatorState> _homeKey = GlobalKey();
+  final GlobalKey<NavigatorState> _articleKey = GlobalKey();
+  final GlobalKey<NavigatorState> _searchKey = GlobalKey();
+  final GlobalKey<NavigatorState> _menuKey = GlobalKey();
 
   late final map = {
     homeIndex: _homeKey,
@@ -136,26 +136,24 @@ class _MainScreenState extends State<MainScreen> {
     menuIndex: _menuKey,
   };
 
-  Future<bool> _onWillPop() async {
-    final NavigatorState currentSelectedTabNavigatorState =
-        map[selectedScreenIndex]!.currentState!;
-    if (currentSelectedTabNavigatorState.canPop()) {
-      currentSelectedTabNavigatorState.pop();
-      return false;
-    } else if (_history.isNotEmpty) {
-      setState(() {
-        selectedScreenIndex = _history.last;
-        _history.removeLast();
-      });
-      return false;
-    }
-    return true;
-  }
-
   @override
   Widget build(BuildContext context) {
     return PopScope(
-      canPop: false,
+      onPopInvoked: (didPop) async {
+        final NavigatorState currentSelectedTabNavigatorState =
+        map[selectedScreenIndex]!.currentState!;
+        if (currentSelectedTabNavigatorState.canPop()) {
+          currentSelectedTabNavigatorState.pop();
+          return;
+        } else if (_history.isNotEmpty) {
+          setState(() {
+            selectedScreenIndex = _history.last;
+            _history.removeLast();
+          });
+          return;
+        }
+        Navigator.of(context).pop();
+      },
       child: Scaffold(
         body: Stack(
           children: [
@@ -166,10 +164,10 @@ class _MainScreenState extends State<MainScreen> {
               child: IndexedStack(
                 index: selectedScreenIndex,
                 children: [
-                  _navigator(_homeKey, homeIndex, HomeScreen()),
-                  _navigator(_articleKey, articleIndex, ArticleScreen()),
-                  _navigator(_searchKey, searchIndex, SearchScreen()),
-                  _navigator(_menuKey, menuIndex, ProfileScreen()),
+                  _navigator(_homeKey, homeIndex, const HomeScreen()),
+                  _navigator(_articleKey, articleIndex, const ArticleScreen()),
+                  _navigator(_searchKey, searchIndex, const SearchScreen()),
+                  _navigator(_menuKey, menuIndex, const ProfileScreen()),
                 ],
               ),
             ),
@@ -193,18 +191,18 @@ class _MainScreenState extends State<MainScreen> {
       ),
     );
   }
-
   Widget _navigator(GlobalKey key, int index, Widget child) {
-    return key.currentState == null && selectedScreenIndex != index
-        ? Container()
-        : Navigator(
-            key: key,
-            onGenerateRoute: (settings) => MaterialPageRoute(
-              builder: (context) => Offstage(
-                offstage: selectedScreenIndex != index,
-                child: child,
-              ),
-            ),
-          );
+    if (key.currentState == null && selectedScreenIndex != index) {
+      return Container();
+    }
+    return Navigator(
+      key: key,
+      onGenerateRoute: (settings) => MaterialPageRoute(
+        builder: (context) => Offstage(
+          offstage: selectedScreenIndex != index,
+          child: child,
+        ),
+      ),
+    );
   }
 }

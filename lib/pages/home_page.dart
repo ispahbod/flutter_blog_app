@@ -4,15 +4,14 @@ import 'package:flutter/material.dart';
 import 'package:flutter_blog_app/carousel/carousel_slider.dart';
 import 'package:flutter_blog_app/constants.dart';
 import 'package:flutter_blog_app/data.dart';
-import 'package:flutter_blog_app/navigation.dart';
-import 'package:flutter_blog_app/pages/article.dart';
+import 'package:flutter_blog_app/pages/article_page.dart';
 
 class HomeScreen extends StatelessWidget {
   const HomeScreen({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    final ThemeData _theme = Theme.of(context);
+    final ThemeData theme = Theme.of(context);
     final stories = AppDatabase.stories;
     final posts = AppDatabase.posts;
     return Scaffold(
@@ -30,7 +29,7 @@ class HomeScreen extends StatelessWidget {
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
                       Text("Hi , Hamed Hadi!",
-                          style: _theme.textTheme.titleMedium),
+                          style: theme.textTheme.titleMedium),
                       Image.asset(
                         "assets/images/icons/notification.png",
                         width: 34,
@@ -42,10 +41,10 @@ class HomeScreen extends StatelessWidget {
                 Padding(
                     padding: const EdgeInsets.fromLTRB(23, 0, 24, 0),
                     child: Text("Explore today's",
-                        style: _theme.textTheme.displayLarge)),
+                        style: theme.textTheme.displayLarge)),
                 Padding(
                   padding: const EdgeInsets.fromLTRB(0, 14, 0, 14),
-                  child: _StoryList(stories: stories, theme: _theme),
+                  child: _StoryList(stories: stories, theme: theme),
                 ),
                 const Padding(
                   padding: EdgeInsets.fromLTRB(5, 0, 0, 0),
@@ -185,7 +184,7 @@ class _StoryList extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final ThemeData _theme = theme;
+    final ThemeData theme = Theme.of(context);
     return SizedBox(
       height: 100,
       width: MediaQuery.of(context).size.width,
@@ -197,7 +196,7 @@ class _StoryList extends StatelessWidget {
           itemCount: stories.length,
           itemBuilder: (context, index) {
             final story = stories[index];
-            return _Story(story: story, theme: _theme);
+            return _Story(story: story, theme: theme);
           },
         ),
       ),
@@ -216,7 +215,7 @@ class _Story extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final ThemeData _theme = theme;
+    final ThemeData theme = Theme.of(context);
     return Padding(
       padding: const EdgeInsets.fromLTRB(6, 2, 6, 0),
       child: Column(
@@ -224,8 +223,8 @@ class _Story extends StatelessWidget {
           Stack(
             children: [
               story.isViewed
-                  ? _profileImageViewed(story, _theme)
-                  : _profileImageNormal(story, _theme),
+                  ? _profileImageViewed(story, theme)
+                  : _profileImageNormal(story, theme),
               Positioned(
                   bottom: 0,
                   right: 0,
@@ -237,7 +236,7 @@ class _Story extends StatelessWidget {
             ],
           ),
           const SizedBox(height: 8),
-          Text(story.name, style: _theme.textTheme.bodyMedium),
+          Text(story.name, style: theme.textTheme.bodyMedium),
         ],
       ),
     );
@@ -296,7 +295,7 @@ class _Story extends StatelessWidget {
   Widget _profileImage(imageFileName) {
     return ClipRRect(
       borderRadius: BorderRadius.circular(16),
-      child: Image.asset("assets/images/stories/${imageFileName}"),
+      child: Image.asset("assets/images/stories/$imageFileName"),
     );
   }
 }
@@ -341,7 +340,7 @@ class Post extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return InkWell(
-      onTap: ()=>Navigator.of(context).push(CupertinoPageRoute(builder: (context) => ArticleScreen())),
+      onTap: ()=>Navigator.of(context).push(CupertinoPageRoute(builder: (context) => const ArticleScreen())),
       child: Container(
         height: 149,
         width: 149,

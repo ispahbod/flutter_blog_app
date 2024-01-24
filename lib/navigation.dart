@@ -1,4 +1,3 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_blog_app/constants.dart';
 import 'package:flutter_blog_app/gen/assets.gen.dart';
@@ -56,7 +55,7 @@ class BottomNavigation extends StatelessWidget {
             right: 0,
             left: 0,
             bottom: 0,
-            child: Container(
+            child: SizedBox(
               height: 65,
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
@@ -132,14 +131,14 @@ class _BottomNavigationItem extends StatelessWidget {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            Image.asset("assets/images/icons/${iconFileName}"),
+            Image.asset("assets/images/icons/$iconFileName"),
             const SizedBox(height: 4),
             Text(
               title,
               style: Theme.of(context).textTheme.bodySmall!.apply(
                     color: isActive
                         ? Constants.primaryColor
-                        : Constants.secondryTextColor,
+                        : Constants.secondaryTextColor,
                   ),
             ),
           ],

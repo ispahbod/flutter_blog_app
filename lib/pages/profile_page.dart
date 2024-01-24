@@ -1,4 +1,3 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_blog_app/data.dart';
 import 'package:flutter_blog_app/gen/assets.gen.dart';
@@ -65,12 +64,12 @@ class ProfileScreen extends StatelessWidget {
                                 child: Column(
                                   crossAxisAlignment: CrossAxisAlignment.start,
                                   children: [
-                                    const Text('@joviedan'),
+                                    const Text('@hamed_hadi'),
                                     const SizedBox(
                                       height: 4,
                                     ),
                                     Text(
-                                      'Jovi Daniel',
+                                      'Hamed Hadi',
                                       style: Theme.of(context)
                                           .textTheme
                                           .titleLarge!

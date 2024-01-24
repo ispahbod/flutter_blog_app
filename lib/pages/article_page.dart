@@ -86,7 +86,7 @@ class ArticleScreen extends StatelessWidget {
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
                               Text(
-                                'Richard Gervain',
+                                'Hamed Hadi',
                                 style: themeData.textTheme.bodySmall!
                                     .copyWith(fontWeight: FontWeight.w400),
                               ),
