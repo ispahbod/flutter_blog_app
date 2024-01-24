@@ -1,8 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_blog_app/gen/fonts.gen.dart';
+import 'package:flutter_blog_app/navigation.dart';
 import 'package:flutter_blog_app/pages/article.dart';
+import 'package:flutter_blog_app/pages/home_page.dart';
 import 'package:flutter_blog_app/pages/profile.dart';
+import 'package:flutter_blog_app/pages/search.dart';
 import 'constants.dart';
 import 'pages/splash_page.dart';
 
@@ -102,7 +105,106 @@ class MyApp extends StatelessWidget {
             )),
       ),
       // home: const SplashScreen(),
-      home: const ProfileScreen(),
+      home: MainScreen(),
     );
+  }
+}
+
+class MainScreen extends StatefulWidget {
+  @override
+  State<MainScreen> createState() => _MainScreenState();
+}
+
+const int homeIndex = 0;
+const int articleIndex = 1;
+const int searchIndex = 2;
+const int menuIndex = 3;
+const double bottomNavigationHeight = 65;
+
+class _MainScreenState extends State<MainScreen> {
+  int selectedScreenIndex = homeIndex;
+  final List<int> _history = [];
+  GlobalKey<NavigatorState> _homeKey = GlobalKey();
+  GlobalKey<NavigatorState> _articleKey = GlobalKey();
+  GlobalKey<NavigatorState> _searchKey = GlobalKey();
+  GlobalKey<NavigatorState> _menuKey = GlobalKey();
+
+  late final map = {
+    homeIndex: _homeKey,
+    articleIndex: _articleKey,
+    searchIndex: _searchKey,
+    menuIndex: _menuKey,
+  };
+
+  Future<bool> _onWillPop() async {
+    final NavigatorState currentSelectedTabNavigatorState =
+        map[selectedScreenIndex]!.currentState!;
+    if (currentSelectedTabNavigatorState.canPop()) {
+      currentSelectedTabNavigatorState.pop();
+      return false;
+    } else if (_history.isNotEmpty) {
+      setState(() {
+        selectedScreenIndex = _history.last;
+        _history.removeLast();
+      });
+      return false;
+    }
+    return true;
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return PopScope(
+      canPop: false,
+      child: Scaffold(
+        body: Stack(
+          children: [
+            Positioned.fill(
+              bottom: bottomNavigationHeight,
+              left: 0,
+              right: 0,
+              child: IndexedStack(
+                index: selectedScreenIndex,
+                children: [
+                  _navigator(_homeKey, homeIndex, HomeScreen()),
+                  _navigator(_articleKey, articleIndex, ArticleScreen()),
+                  _navigator(_searchKey, searchIndex, SearchScreen()),
+                  _navigator(_menuKey, menuIndex, ProfileScreen()),
+                ],
+              ),
+            ),
+            Positioned(
+              bottom: 0,
+              left: 0,
+              right: 0,
+              child: BottomNavigation(
+                selectedIndex: selectedScreenIndex,
+                onTap: (int index) {
+                  setState(() {
+                    _history.remove(selectedScreenIndex);
+                    _history.add(selectedScreenIndex);
+                    selectedScreenIndex = index;
+                  });
+                },
+              ),
+            )
+          ],
+        ),
+      ),
+    );
+  }
+
+  Widget _navigator(GlobalKey key, int index, Widget child) {
+    return key.currentState == null && selectedScreenIndex != index
+        ? Container()
+        : Navigator(
+            key: key,
+            onGenerateRoute: (settings) => MaterialPageRoute(
+              builder: (context) => Offstage(
+                offstage: selectedScreenIndex != index,
+                child: child,
+              ),
+            ),
+          );
   }
 }

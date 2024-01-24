@@ -5,6 +5,7 @@ import 'package:flutter_blog_app/carousel/carousel_slider.dart';
 import 'package:flutter_blog_app/constants.dart';
 import 'package:flutter_blog_app/data.dart';
 import 'package:flutter_blog_app/navigation.dart';
+import 'package:flutter_blog_app/pages/article.dart';
 
 class HomeScreen extends StatelessWidget {
   const HomeScreen({Key? key}) : super(key: key);
@@ -16,67 +17,60 @@ class HomeScreen extends StatelessWidget {
     final posts = AppDatabase.posts;
     return Scaffold(
       body: SafeArea(
-        child: Stack(
-          children: [
-            Positioned.fill(
-              child: SingleChildScrollView(
-                physics: const BouncingScrollPhysics(),
-                child: Padding(
-                  padding: const EdgeInsets.only(bottom: 85),
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
+        child: SingleChildScrollView(
+          physics: const BouncingScrollPhysics(),
+          child: Padding(
+            padding: const EdgeInsets.only(bottom: 25),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Padding(
+                  padding: const EdgeInsets.fromLTRB(24, 24, 24, 4),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
-                      Padding(
-                        padding: const EdgeInsets.fromLTRB(24, 24, 24, 4),
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          children: [
-                            Text("Hi , Hamed Hadi!",
-                                style: _theme.textTheme.titleMedium),
-                            Image.asset(
-                              "assets/images/icons/notification.png",
-                              width: 34,
-                              height: 34,
-                            ),
-                          ],
-                        ),
-                      ),
-                      Padding(
-                          padding: const EdgeInsets.fromLTRB(23, 0, 24, 0),
-                          child: Text("Explore today's",
-                              style: _theme.textTheme.displayLarge)),
-                      Padding(
-                        padding: const EdgeInsets.fromLTRB(0, 14, 0, 14),
-                        child: _StoryList(stories: stories, theme: _theme),
-                      ),
-                      const Padding(
-                        padding: EdgeInsets.fromLTRB(5, 0, 0, 0),
-                        child: _CategoryList(),
-                      ),
-                      const Padding(
-                        padding: EdgeInsets.fromLTRB(25, 20, 10, 20),
-                        child: _PostList(),
-                      ),
-                      Padding(
-                        padding: const EdgeInsets.fromLTRB(13, 0, 13, 0),
-                        child: ListView.builder(
-                          physics: const ClampingScrollPhysics(),
-                          itemCount: posts.length,
-                          itemExtent: 141,
-                          shrinkWrap: true,
-                          itemBuilder: (context, index) {
-                            final post = posts[index];
-                            return Post(post: post);
-                          },
-                        ),
+                      Text("Hi , Hamed Hadi!",
+                          style: _theme.textTheme.titleMedium),
+                      Image.asset(
+                        "assets/images/icons/notification.png",
+                        width: 34,
+                        height: 34,
                       ),
                     ],
                   ),
                 ),
-              ),
+                Padding(
+                    padding: const EdgeInsets.fromLTRB(23, 0, 24, 0),
+                    child: Text("Explore today's",
+                        style: _theme.textTheme.displayLarge)),
+                Padding(
+                  padding: const EdgeInsets.fromLTRB(0, 14, 0, 14),
+                  child: _StoryList(stories: stories, theme: _theme),
+                ),
+                const Padding(
+                  padding: EdgeInsets.fromLTRB(5, 0, 0, 0),
+                  child: _CategoryList(),
+                ),
+                const Padding(
+                  padding: EdgeInsets.fromLTRB(25, 20, 10, 20),
+                  child: _PostList(),
+                ),
+                Padding(
+                  padding: const EdgeInsets.fromLTRB(13, 0, 13, 0),
+                  child: ListView.builder(
+                    physics: const ClampingScrollPhysics(),
+                    itemCount: posts.length,
+                    itemExtent: 141,
+                    shrinkWrap: true,
+                    itemBuilder: (context, index) {
+                      final post = posts[index];
+                      return Post(post: post);
+                    },
+                  ),
+                ),
+              ],
             ),
-            Positioned(bottom: 0, right: 0, left: 0, child: BottomNavigation()),
-          ],
+          ),
         ),
       ),
     );
@@ -346,99 +340,102 @@ class Post extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      height: 149,
-      width: 149,
-      margin: const EdgeInsets.fromLTRB(10, 8, 10, 8),
-      decoration: BoxDecoration(
-        color: Colors.white,
-        borderRadius: BorderRadius.circular(24),
-        boxShadow: const [
-          BoxShadow(blurRadius: 10, color: Color(0x1a5282FF)),
-        ],
-      ),
-      child: Row(
-        children: [
-          ClipRRect(
-            borderRadius: BorderRadius.circular(16),
-            child:
-                Image.asset('assets/images/posts/small/${post.imageFileName}'),
-          ),
-          Expanded(
-            child: Padding(
-              padding: const EdgeInsets.only(left: 15, right: 15),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  Text(
-                    post.caption,
-                    style: Theme.of(context)
-                        .textTheme
-                        .displaySmall!
-                        .apply(color: const Color(0xff376AED)),
-                  ),
-                  const SizedBox(height: 6),
-                  Text(
-                    post.title,
-                    style: Theme.of(context).textTheme.displaySmall,
-                  ),
-                  const SizedBox(height: 15),
-                  Row(children: [
-                    Padding(
-                      padding: const EdgeInsets.only(right: 10),
-                      child: Row(
-                        children: [
-                          Icon(
-                            CupertinoIcons.hand_thumbsup,
-                            size: 16,
-                            color:
-                                Theme.of(context).textTheme.bodyMedium!.color,
-                          ),
-                          const SizedBox(width: 4),
-                          Text(
-                            post.likes,
-                            style: Theme.of(context).textTheme.titleSmall,
-                          ),
-                        ],
-                      ),
+    return InkWell(
+      onTap: ()=>Navigator.of(context).push(CupertinoPageRoute(builder: (context) => ArticleScreen())),
+      child: Container(
+        height: 149,
+        width: 149,
+        margin: const EdgeInsets.fromLTRB(10, 8, 10, 8),
+        decoration: BoxDecoration(
+          color: Colors.white,
+          borderRadius: BorderRadius.circular(24),
+          boxShadow: const [
+            BoxShadow(blurRadius: 10, color: Color(0x1a5282FF)),
+          ],
+        ),
+        child: Row(
+          children: [
+            ClipRRect(
+              borderRadius: BorderRadius.circular(16),
+              child:
+                  Image.asset('assets/images/posts/small/${post.imageFileName}'),
+            ),
+            Expanded(
+              child: Padding(
+                padding: const EdgeInsets.only(left: 15, right: 15),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Text(
+                      post.caption,
+                      style: Theme.of(context)
+                          .textTheme
+                          .displaySmall!
+                          .apply(color: const Color(0xff376AED)),
                     ),
-                    Padding(
-                      padding: const EdgeInsets.only(right: 10),
-                      child: Row(
-                        children: [
-                          Icon(
-                            CupertinoIcons.clock,
-                            size: 16,
-                            color:
-                                Theme.of(context).textTheme.bodyMedium!.color,
-                          ),
-                          const SizedBox(width: 4),
-                          Text(
-                            post.time,
-                            style: Theme.of(context).textTheme.titleSmall,
-                          ),
-                        ],
-                      ),
+                    const SizedBox(height: 6),
+                    Text(
+                      post.title,
+                      style: Theme.of(context).textTheme.displaySmall,
                     ),
-                    Expanded(
-                      child: Container(
-                        alignment: Alignment.centerRight,
-                        child: Icon(
-                          post.isBookmarked
-                              ? CupertinoIcons.bookmark_fill
-                              : CupertinoIcons.bookmark,
-                          size: 16,
-                          color: Theme.of(context).textTheme.bodyMedium!.color,
+                    const SizedBox(height: 15),
+                    Row(children: [
+                      Padding(
+                        padding: const EdgeInsets.only(right: 10),
+                        child: Row(
+                          children: [
+                            Icon(
+                              CupertinoIcons.hand_thumbsup,
+                              size: 16,
+                              color:
+                                  Theme.of(context).textTheme.bodyMedium!.color,
+                            ),
+                            const SizedBox(width: 4),
+                            Text(
+                              post.likes,
+                              style: Theme.of(context).textTheme.titleSmall,
+                            ),
+                          ],
                         ),
                       ),
-                    ),
-                  ])
-                ],
+                      Padding(
+                        padding: const EdgeInsets.only(right: 10),
+                        child: Row(
+                          children: [
+                            Icon(
+                              CupertinoIcons.clock,
+                              size: 16,
+                              color:
+                                  Theme.of(context).textTheme.bodyMedium!.color,
+                            ),
+                            const SizedBox(width: 4),
+                            Text(
+                              post.time,
+                              style: Theme.of(context).textTheme.titleSmall,
+                            ),
+                          ],
+                        ),
+                      ),
+                      Expanded(
+                        child: Container(
+                          alignment: Alignment.centerRight,
+                          child: Icon(
+                            post.isBookmarked
+                                ? CupertinoIcons.bookmark_fill
+                                : CupertinoIcons.bookmark,
+                            size: 16,
+                            color: Theme.of(context).textTheme.bodyMedium!.color,
+                          ),
+                        ),
+                      ),
+                    ])
+                  ],
+                ),
               ),
-            ),
-          )
-        ],
+            )
+          ],
+        ),
       ),
     );
   }

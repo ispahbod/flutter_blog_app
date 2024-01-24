@@ -73,10 +73,10 @@ class ProfileScreen extends StatelessWidget {
                                       'Jovi Daniel',
                                       style: Theme.of(context)
                                           .textTheme
-                                          .bodyText1!
+                                          .titleLarge!
                                           .copyWith(
                                               fontWeight: FontWeight.w700,
-                                              fontSize: 15),
+                                              fontSize: 22),
                                     ),
                                     const SizedBox(
                                       height: 8,
@@ -85,7 +85,7 @@ class ProfileScreen extends StatelessWidget {
                                       'UX Designer',
                                       style: Theme.of(context)
                                           .textTheme
-                                          .bodyText1!
+                                          .bodyMedium!
                                           .apply(
                                               color: themeData
                                                   .colorScheme.primary),
@@ -100,14 +100,14 @@ class ProfileScreen extends StatelessWidget {
                           padding: const EdgeInsets.fromLTRB(32, 0, 32, 0),
                           child: Text(
                             'About me',
-                            style: themeData.textTheme.headline6,
+                            style: themeData.textTheme.titleLarge,
                           ),
                         ),
                         Padding(
                           padding: const EdgeInsets.fromLTRB(32, 4, 32, 32),
                           child: Text(
                             'Madison Blackstone is a director of user experience design, with experience managing global teams.',
-                            style: themeData.textTheme.bodyText1!
+                            style: themeData.textTheme.bodyMedium!
                                 .copyWith(fontWeight: FontWeight.w200),
                           ),
                         ),
@@ -163,7 +163,7 @@ class ProfileScreen extends StatelessWidget {
                                     ),
                                     Text(
                                       'Post',
-                                      style: themeData.textTheme.bodyText1!
+                                      style: themeData.textTheme.bodySmall!
                                           .copyWith(
                                         fontWeight: FontWeight.w200,
                                         color: themeData.colorScheme.onPrimary,
@@ -191,7 +191,7 @@ class ProfileScreen extends StatelessWidget {
                                   Text(
                                     'Following',
                                     style:
-                                        themeData.textTheme.bodyText1!.copyWith(
+                                        themeData.textTheme.bodySmall!.copyWith(
                                       fontWeight: FontWeight.w200,
                                       color: themeData.colorScheme.onPrimary,
                                     ),
@@ -217,7 +217,7 @@ class ProfileScreen extends StatelessWidget {
                                   Text(
                                     'Followers',
                                     style:
-                                        themeData.textTheme.bodyText1!.copyWith(
+                                        themeData.textTheme.bodySmall!.copyWith(
                                       fontWeight: FontWeight.w200,
                                       color: themeData.colorScheme.onPrimary,
                                     ),
@@ -248,7 +248,7 @@ class ProfileScreen extends StatelessWidget {
                           Expanded(
                             child: Text(
                               'My Posts',
-                              style: themeData.textTheme.headline6,
+                              style: themeData.textTheme.titleLarge,
                             ),
                           ),
                           IconButton(
