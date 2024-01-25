@@ -5,12 +5,13 @@ class StoryData {
   final String iconFileName;
   final bool isViewed;
 
-  StoryData(
-      {required this.id,
-        required this.name,
-        required this.imageFileName,
-        required this.iconFileName,
-        required this.isViewed});
+  StoryData({
+    required this.id,
+    required this.name,
+    required this.imageFileName,
+    required this.iconFileName,
+    required this.isViewed,
+  });
 }
 
 class Category {
@@ -31,14 +32,15 @@ class PostData {
   final bool isBookmarked;
   final String imageFileName;
 
-  PostData(
-      {required this.id,
-        required this.caption,
-        required this.title,
-        required this.likes,
-        required this.time,
-        required this.isBookmarked,
-        required this.imageFileName});
+  PostData({
+    required this.id,
+    required this.caption,
+    required this.title,
+    required this.likes,
+    required this.time,
+    required this.isBookmarked,
+    required this.imageFileName,
+  });
 }
 
 class AppDatabase {
@@ -113,7 +115,6 @@ class AppDatabase {
       Category(id: 106, title: 'Economy', imageFileName: 'large_post_6.jpg'),
     ];
   }
-
   static List<PostData> get posts {
     return [
       PostData(
@@ -152,6 +153,7 @@ class AppDatabase {
     return items;
   }
 }
+
 class OnBoardingItem {
   final String title;
   final String description;
