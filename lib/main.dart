@@ -7,6 +7,7 @@ import 'package:flutter_blog_app/pages/home_page.dart';
 import 'package:flutter_blog_app/pages/onboarding_page.dart';
 import 'package:flutter_blog_app/pages/profile_page.dart';
 import 'package:flutter_blog_app/pages/search_page.dart';
+import 'package:get/get.dart';
 import 'constants.dart';
 
 void main() {
@@ -22,9 +23,10 @@ void main() {
 
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
+
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
+    return GetMaterialApp(
       title: 'Blog Club',
       theme: ThemeData(
         colorScheme: const ColorScheme.light(
@@ -104,9 +106,44 @@ class MyApp extends StatelessWidget {
             )),
       ),
       home: const OnBoardingScreen(),
+      getPages: AppPages.routes,
+      initialRoute: AppPages.INITIAL,
     );
   }
 }
+
+class AppPages {
+  AppPages._();
+
+  static const INITIAL = Routes.HOME;
+
+  static final routes = [
+    GetPage(
+      name: Routes.HOME,
+      page: () => HomeView(),
+      binding: HomeBinding(),
+      // binding: HomeBinding(),
+    ), GetPage(
+      name: Routes.ARTICLE,
+      page: () => ArticleScreen(),
+      transition: Transition.cupertino,
+      // binding: HomeBinding(),
+    ),
+  ];
+}
+
+abstract class Routes {
+  Routes._();
+  static const HOME = _Paths.HOME;
+  static const ARTICLE = _Paths.ARTICLE;
+}
+
+abstract class _Paths {
+  _Paths._();
+  static const HOME = '/home';
+  static const ARTICLE = '/article';
+}
+
 
 class MainScreen extends StatefulWidget {
   const MainScreen({Key? key}) : super(key: key);
@@ -140,8 +177,7 @@ class _MainScreenState extends State<MainScreen> {
   Widget build(BuildContext context) {
     return PopScope(
       onPopInvoked: (didPop) async {
-        final NavigatorState currentSelectedTabNavigatorState =
-        map[selectedScreenIndex]!.currentState!;
+        final NavigatorState currentSelectedTabNavigatorState = map[selectedScreenIndex]!.currentState!;
         if (currentSelectedTabNavigatorState.canPop()) {
           currentSelectedTabNavigatorState.pop();
           return;
@@ -164,7 +200,7 @@ class _MainScreenState extends State<MainScreen> {
               child: IndexedStack(
                 index: selectedScreenIndex,
                 children: [
-                  _navigator(_homeKey, homeIndex, const HomeScreen()),
+                  _navigator(_homeKey, homeIndex, const HomeView()),
                   _navigator(_articleKey, articleIndex, const ArticleScreen()),
                   _navigator(_searchKey, searchIndex, const SearchScreen()),
                   _navigator(_menuKey, menuIndex, const ProfileScreen()),
@@ -191,6 +227,7 @@ class _MainScreenState extends State<MainScreen> {
       ),
     );
   }
+
   Widget _navigator(GlobalKey key, int index, Widget child) {
     if (key.currentState == null && selectedScreenIndex != index) {
       return Container();

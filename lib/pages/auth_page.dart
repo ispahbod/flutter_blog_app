@@ -56,9 +56,7 @@ class _AuthScreenState extends State<AuthScreen> {
                           child: Text(
                             'LOGIN',
                             style: tabTextStyle.apply(
-                              color: selectedTabIndex == loginTab
-                                  ? Colors.white
-                                  : Colors.white.withOpacity(0.5),
+                              color: selectedTabIndex == loginTab ? Colors.white : Colors.white.withOpacity(0.5),
                             ),
                           ),
                         ),
@@ -71,9 +69,7 @@ class _AuthScreenState extends State<AuthScreen> {
                           child: Text(
                             'SIGN UP',
                             style: tabTextStyle.apply(
-                              color: selectedTabIndex == signTab
-                                  ? Colors.white
-                                  : Colors.white.withOpacity(0.5),
+                              color: selectedTabIndex == signTab ? Colors.white : Colors.white.withOpacity(0.5),
                             ),
                           ),
                         ),
@@ -91,11 +87,28 @@ class _AuthScreenState extends State<AuthScreen> {
                       ),
                       child: SingleChildScrollView(
                         child: Padding(
-                          padding: const EdgeInsets.all(32),
-                          child: selectedTabIndex == loginTab
-                              ? const _Login()
-                              : const _Signup(),
-                        ),
+                            padding: const EdgeInsets.all(32),
+                            child: AnimatedSwitcher(
+                              duration: Duration(milliseconds: 2000),
+                              switchInCurve: Curves.easeIn,
+                              switchOutCurve: Curves.easeOut,
+                              transitionBuilder: (child, animation) {
+                                return FadeTransition(
+                                  opacity: animation,
+                                  child: SlideTransition(
+                                    position: Tween<Offset>(begin: Offset(1.0, 0.0), end: Offset(0.0, 0.0)).animate(animation),
+                                    child: child,
+                                  ),
+                                );
+                              },
+                              child: selectedTabIndex == loginTab
+                                  ? const _Login(
+                                      key: ValueKey(1),
+                                    )
+                                  : const _Signup(
+                                      key: ValueKey(2),
+                                    ),
+                            )),
                       ),
                     ),
                   ),
@@ -153,7 +166,7 @@ class _Login extends StatelessWidget {
         const SizedBox(height: 24),
         ElevatedButton(
           onPressed: () {
-            Navigator.of(context).pushReplacement(CupertinoPageRoute(builder: (builder) =>  MainScreen()));
+            Navigator.of(context).pushReplacement(CupertinoPageRoute(builder: (builder) => MainScreen()));
           },
           style: ButtonStyle(
             backgroundColor: const MaterialStatePropertyAll(Constants.primaryColor),
@@ -209,6 +222,7 @@ class _Signup extends StatelessWidget {
   const _Signup({
     Key? key,
   }) : super(key: key);
+
   @override
   Widget build(BuildContext context) {
     return Column(
@@ -261,10 +275,10 @@ class _Signup extends StatelessWidget {
         const SizedBox(height: 24),
         ElevatedButton(
           onPressed: () {
-            Navigator.of(context).pushReplacement(CupertinoPageRoute(builder: (builder) =>MainScreen()));
+            Navigator.of(context).pushReplacement(CupertinoPageRoute(builder: (builder) => MainScreen()));
           },
           style: ButtonStyle(
-            backgroundColor: const  MaterialStatePropertyAll(Constants.primaryColor),
+            backgroundColor: const MaterialStatePropertyAll(Constants.primaryColor),
             minimumSize: MaterialStatePropertyAll(
               Size(MediaQuery.of(context).size.width, 60),
             ),
