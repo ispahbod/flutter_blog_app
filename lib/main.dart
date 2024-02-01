@@ -120,12 +120,12 @@ class AppPages {
   static final routes = [
     GetPage(
       name: Routes.HOME,
-      page: () => HomeView(),
+      page: () => const HomeView(),
       binding: HomeBinding(),
       // binding: HomeBinding(),
     ), GetPage(
       name: Routes.ARTICLE,
-      page: () => ArticleScreen(),
+      page: () => const ArticleScreen(),
       transition: Transition.cupertino,
       // binding: HomeBinding(),
     ),
