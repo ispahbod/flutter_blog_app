@@ -55,7 +55,7 @@ class ArticleScreen extends StatelessWidget {
                 automaticallyImplyLeading: false,
                 leading: IconButton(
                   onPressed: (){Get.back();},
-                  icon: Icon(CupertinoIcons.back),
+                  icon: const Icon(CupertinoIcons.back),
                 ),
                 actions: [
                   IconButton(onPressed: () {}, icon: const Icon(Icons.more_horiz_rounded)),

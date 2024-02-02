@@ -89,14 +89,14 @@ class _AuthScreenState extends State<AuthScreen> {
                         child: Padding(
                             padding: const EdgeInsets.all(32),
                             child: AnimatedSwitcher(
-                              duration: Duration(milliseconds: 2000),
+                              duration: const Duration(milliseconds: 2000),
                               switchInCurve: Curves.easeIn,
                               switchOutCurve: Curves.easeOut,
                               transitionBuilder: (child, animation) {
                                 return FadeTransition(
                                   opacity: animation,
                                   child: SlideTransition(
-                                    position: Tween<Offset>(begin: Offset(1.0, 0.0), end: Offset(0.0, 0.0)).animate(animation),
+                                    position: Tween<Offset>(begin: const Offset(1.0, 0.0), end: const Offset(0.0, 0.0)).animate(animation),
                                     child: child,
                                   ),
                                 );
@@ -166,7 +166,7 @@ class _Login extends StatelessWidget {
         const SizedBox(height: 24),
         ElevatedButton(
           onPressed: () {
-            Navigator.of(context).pushReplacement(CupertinoPageRoute(builder: (builder) => MainScreen()));
+            Navigator.of(context).pushReplacement(CupertinoPageRoute(builder: (builder) => const MainScreen()));
           },
           style: ButtonStyle(
             backgroundColor: const MaterialStatePropertyAll(Constants.primaryColor),
@@ -275,7 +275,7 @@ class _Signup extends StatelessWidget {
         const SizedBox(height: 24),
         ElevatedButton(
           onPressed: () {
-            Navigator.of(context).pushReplacement(CupertinoPageRoute(builder: (builder) => MainScreen()));
+            Navigator.of(context).pushReplacement(CupertinoPageRoute(builder: (builder) => const MainScreen()));
           },
           style: ButtonStyle(
             backgroundColor: const MaterialStatePropertyAll(Constants.primaryColor),

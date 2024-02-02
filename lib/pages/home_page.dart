@@ -31,12 +31,12 @@ class HomeController extends GetxController {
   @override
   void onInit() {
     super.onInit();
-    Timer.periodic(Duration(seconds: 3), (timer) {
+    Timer.periodic(const Duration(seconds: 3), (timer) {
       posts.add(AppDatabase.posts[2]);
       update(['Latest Posts']);
     });
 
-    Timer.periodic(Duration(seconds: 5), (timer) {
+    Timer.periodic(const Duration(seconds: 5), (timer) {
       categories.add(AppDatabase.categories[2]);
     });
   }
